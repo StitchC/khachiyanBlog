@@ -6,12 +6,11 @@
     <div class="index-main">
       <div class="author-content">
         <div class="avatar">
-          <img :src="avatar">
+          <img src="./Avatar.png">
         </div>
         <div class="author-info">
           <h4 class="author-name">khachiyan</h4>
-          <p class="author-desc">...</p>
-          <p clas="author-desc">tpl:</p>
+          <p class="author-desc">啦啦啦</p>
         </div>
         <ul class="article-tags-list"></ul>
       </div>
@@ -45,7 +44,7 @@ export default {
       articles: []    // 文章列表
     };
   },
-  created() {
+  mounted() {
     this.$http.get('/khachiyanBlog/articles')
       .then((res) => {
         this.articles = res.body;
@@ -120,7 +119,7 @@ export default {
             &:first-child
               margin-top: 0
       .author-article
-        margin-left: 480px
+        margin-left: 380px
         .article-item
           display: inline-block
           vertical-align: top

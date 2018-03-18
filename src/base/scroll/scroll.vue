@@ -65,7 +65,9 @@
       _initScroll() {
         this.scroll = new Bscroll(this.$refs.scroll, {
           probeType: this.probeType,
-          click: this.click
+          click: this.click,
+          mouseWheel: this.mouseWheel,
+          scrollbar: this.scrollbar
         });
 
         if(this.listenScroll) {

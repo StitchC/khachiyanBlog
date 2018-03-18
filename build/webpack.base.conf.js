@@ -34,6 +34,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
+      'bower': resolve('bower_components'),
       'vue$': 'vue/dist/vue.esm.js',
       'common': resolve('src/common'),
       'components': resolve('src/components'),

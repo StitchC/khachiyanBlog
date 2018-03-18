@@ -25,7 +25,7 @@
         article: {},
         // 配置scroll 组件属性
         mouseWheel: {
-          speed: 10,
+          speed: 5,
           invert: false
         },
         scrollbar: {
@@ -73,11 +73,15 @@
     background-color: #fff
     overflow: hidden
     .scroll-view
+      position: relative
+      width: 70%
       height: 100%
+      margin: 0 auto
+      padding: 0 20px
       overflow: hidden
+      border-right: 1px solid #ccc
+      border-left: 1px solid #ccc
     .article-content
-      width: 800px
-      margin: 20px auto 0 auto
       .article-title
         font-size: 20px
       .article-tags

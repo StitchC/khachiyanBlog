@@ -14,6 +14,49 @@ export function getQuery(str) {
 }
 
 
+
+
+
+
+
+
+
+
+// 将二进制图片转换成base64
+export async function turnBase64(file) {
+  // @param {fileObject} file - 一个二进制的文件对象
+
+  let fileReader = new FileReader();
+  fileReader.readAsDataURL(file);
+
+  var readFile = function() {
+    return new Promise((resolve, reject) => {
+      fileReader.onload = function() {
+        console.log(this.result);
+        resolve(this.result);
+      };
+
+      fileReader.onerror = function() {
+        reject(new Error('图片转换失败'));
+      };
+    });
+
+  };
+
+
+  return readFile();
+
+}
+
+
+
+
+
+
+
+
+
+
 // 格式化时间
 export function formatDate(timestamp, format) {
   let date = new Date(timestamp); // 获取时间
