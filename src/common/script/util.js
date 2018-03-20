@@ -29,22 +29,19 @@ export async function turnBase64(file) {
   let fileReader = new FileReader();
   fileReader.readAsDataURL(file);
 
-  var readFile = function() {
-    return new Promise((resolve, reject) => {
-      fileReader.onload = function() {
-        console.log(this.result);
-        resolve(this.result);
-      };
+  let promise = new Promise((resolve, reject) => {
+    fileReader.onload = function() {
+      resolve(this.result);
+    };
 
-      fileReader.onerror = function() {
-        reject(new Error('图片转换失败'));
-      };
-    });
-
-  };
+    fileReader.onerror = function() {
+      reject(new Error('图片转换失败'));
+    };
+  });
 
 
-  return readFile();
+
+  return await promise;
 
 }
 

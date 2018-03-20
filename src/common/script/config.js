@@ -27,5 +27,5 @@ export const wangEditorConfig = {
     'undo',  // 撤销
     'redo'  // 重复
   ],
-  uploadImgServer: '/hello'
+  uploadImgServer: ''
 };

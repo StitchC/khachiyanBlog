@@ -31,12 +31,14 @@
         <ul class="tag-list">
           <li class="tag-item" v-for="(tag, index) in articleTags" :key="index">
             {{tag}}
-            <span class="del-btn" @click="deleteTag(index)">✖</span>
+            <span class="del-btn" @click="deleteTag(index)">
+              <i>✖</i>
+            </span>
           </li>
         </ul>
       </div>
       <div class="edit-row">
-        <button class="publish-btn" type="button">发布</button>
+        <button class="publish-btn" type="button" @click="publish">发布</button>
       </div>
     </div>
 </template>
@@ -74,6 +76,8 @@
               alert('请上传图片');
               return false;
             }
+            this.coverImg = e.target.files[0];
+
             turnBase64(e.target.files[0])
               .then(url => {
                 console.log(url);
@@ -105,6 +109,33 @@
           },
           uploadTimeout(xhr, editor) {
             alert('抱歉 图片上传超时');
+          },
+
+
+          publish() {
+            // 发布文章
+            let formData = new FormData();
+
+            let vue = this;
+
+            let json = {
+              title: vue.articleTitle,
+              content: vue.$refs.editor.getHtml(),
+              desc: vue.articleDesc,
+              tagName: vue.articleTags
+            };
+
+            formData.append('file', this.coverImg);
+
+            // 整理json
+            formData.append('article', new Blob(
+              [JSON.stringify(json)],
+              {type : 'application/json'}
+              ));
+
+            this.$http.post('/khachiyanBlog/articles', formData, {
+              emulateJSON: true
+            });
           }
         }
     };
@@ -190,6 +221,8 @@
             color: #fff
             text-align: center
             cursor: pointer
+            i
+              transform: scale(0.3)
       .publish-btn
         width: 100px
         line-height: 30px

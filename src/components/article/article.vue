@@ -1,15 +1,13 @@
 <template>
   <div class="article">
-    <scroll class="scroll-view" :mouse-wheel="mouseWheel" :scrollbar="scrollbar" :data="article">
-      <div class="article-content">
-        <h6 class="article-title">{{article.title}}</h6>
-        <ul class="article-tags">
-          <li class="article-tag-item" v-for="(tag, index) in article.tags" :key="index">{{tag.content}}</li>
-        </ul>
-        <p class="article-post-time">{{article.updateTime | formatTime}}</p>
-        <div class="article-txt" v-html="article.content"></div>
-      </div>
-    </scroll>
+    <div class="article-content">
+      <h6 class="article-title">{{article.title}}</h6>
+      <ul class="article-tags">
+        <li class="article-tag-item" v-for="(tag, index) in article.tags" :key="index">{{tag.content}}</li>
+      </ul>
+      <p class="article-post-time">{{article.updateTime | formatTime}}</p>
+      <div class="article-txt" v-html="article.content"></div>
+    </div>
   </div>
 </template>
 
@@ -71,17 +69,10 @@
     width: 100%
     height: 100%
     background-color: #fff
-    overflow: hidden
-    .scroll-view
-      position: relative
-      width: 70%
-      height: 100%
-      margin: 0 auto
-      padding: 0 20px
-      overflow: hidden
-      border-right: 1px solid #ccc
-      border-left: 1px solid #ccc
+    overflow-y: scroll
+    overflow-x: hidden
     .article-content
+      padding: 0 20px 50px 20px
       .article-title
         font-size: 20px
       .article-tags

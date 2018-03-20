@@ -16,35 +16,36 @@
       },
       mounted() {
         this._initEditor();
-
-        this.$emit('mounted', true);
-
-        if(this.config.uploadImgServer) {
-          // 如果开启了图片上传服务器功能 监听图片上传成功回调
-          this.editor.uploadImgHooks = {
-            before(xhr, editor, img) {
-              this.$emit('before', xhr, editor, img);
-            },
-            success(xhr, editor, result) {
-              this.$emit('success', xhr, editor, result);
-            },
-            fail(xhr, editor, result) {
-              this.$emit('fail', xhr, editor, result);
-            },
-            error: function (xhr, editor) {
-              this.$emit('error', xhr, editor);
-            },
-            timeout: function (xhr, editor) {
-              this.$emit('timeout', xhr, editor);
-            },
-          };
-        }
       },
       methods: {
         _initEditor() {
           if(!this.editor) {
             this.editor = new W(this.$refs.editor);
             this.editor.customConfig = this.config;
+
+            const vue = this;
+
+            if(this.config.uploadImgServer) {
+
+              // 如果开启了图片上传服务器功能 监听图片上传成功回调
+              this.editor.customConfig.uploadImgHooks = {
+                before(xhr, editor, files) {
+                  vue.$emit('before', xhr, editor, files);
+                },
+                success(xhr, editor, result) {
+                  vue.$emit('success', xhr, editor, result);
+                },
+                fail(xhr, editor, result) {
+                  vue.$emit('fail', xhr, editor, result);
+                },
+                error(xhr, editor) {
+                  vue.$emit('error', xhr, editor);
+                },
+                timeout(xhr, editor) {
+                  vue.$emit('timeout', xhr, editor);
+                }
+              };
+            }
             this.editor.create();
           }
         },

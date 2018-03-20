@@ -57,9 +57,15 @@
       }
     },
     mounted() {
-      setTimeout(() => {
-        this._initScroll();
-      }, 20);
+      if(!this.scroll) {
+        setTimeout(() => {
+          this._initScroll();
+        }, 20);
+      }else {
+        setTimeout(() => {
+          this.refresh();
+        }, 50);
+      }
     },
     methods: {
       _initScroll() {
@@ -97,6 +103,7 @@
     },
     watch: {
       data() {
+        console.log('refresh');
         setTimeout(() => {
           this.refresh();
         }, 20);
